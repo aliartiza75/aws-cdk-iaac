@@ -18,7 +18,8 @@ class lambdaPost(Stack):
             handler='api.lambdaPost.lambdaPost.handler',
             environment={ # ADD THIS, FILL IT FOR ACTUAL VALUE 
                "DYNAMODB_TABLE_NAME": "test",
-            }
+            },
+            timeout=Duration.minutes(5)
         )
 
         apigw.LambdaRestApi(
