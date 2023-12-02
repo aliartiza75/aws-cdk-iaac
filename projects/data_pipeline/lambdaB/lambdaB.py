@@ -27,6 +27,15 @@ def save_to_s3(data: dict[str, Any], filename: str):
 
 def handler(event, context):
     """Process order result."""
-    if event["status"] == "rejected":
-        raise ValueError("Order status is rejected!")
-    save_to_s3(data=event, filename=f"orders/order_{dt.datetime.now(dt.timezone.utc).isoformat()}")
+
+    data = (json.loads(event["Records"][0]['body'])["responsePayload"])
+    print(type(data), data)
+    
+    if data["results"] == True:
+        print("AAAAAAAAAAAAAAAAAAAAAAAAA")
+        if event["status"] == "rejected":
+            raise ValueError("Order status is rejected!")
+        save_to_s3(data=event, filename=f"orders/order_{dt.datetime.now(dt.timezone.utc).isoformat()}")
+    else:
+        # invoke lambda again
+        print("BBBBBBBBBBBBBBBBBBBBBBBBB")

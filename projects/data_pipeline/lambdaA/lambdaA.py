@@ -1,5 +1,6 @@
 import random
-
+import boto3
+_lambda = boto3.client('lambda')
 
 def handler(event, context):
     """Generate event for results processing."""

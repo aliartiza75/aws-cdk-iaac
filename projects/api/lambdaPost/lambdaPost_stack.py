@@ -1,3 +1,4 @@
+import aws_cdk as cdk
 from constructs import Construct
 from aws_cdk import (
     Stack,
@@ -19,7 +20,7 @@ class lambdaPost(Stack):
             environment={ # ADD THIS, FILL IT FOR ACTUAL VALUE 
                "DYNAMODB_TABLE_NAME": "test",
             },
-            timeout=Duration.minutes(5)
+            timeout=cdk.Duration.minutes(5)
         )
 
         apigw.LambdaRestApi(

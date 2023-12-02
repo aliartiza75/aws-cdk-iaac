@@ -1,3 +1,4 @@
+import aws_cdk as cdk
 from constructs import Construct
 from aws_cdk import (
     Stack,
@@ -15,4 +16,8 @@ class lambdaB(Stack):
             runtime=_lambda.Runtime.PYTHON_3_10,
             code=_lambda.Code.from_asset('projects'),
             handler='lambdaB.lambdaB.handler',
+            environment={ # ADD THIS, FILL IT FOR ACTUAL VALUE 
+               "LOG_BUCKET": "test",
+            },
+            timeout=cdk.Duration.minutes(5)
         )
