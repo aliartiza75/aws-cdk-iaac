@@ -25,7 +25,7 @@ import aws_cdk.aws_s3 as s3
 # # _lambda import aws_lambda_destinations as destinations
 from aws_cdk import aws_lambda_destinations as destinations
 
-class lambdaA(Stack):
+class dataPipeline(Stack):
 
     def __init__(self, scope: Construct, id: str, **kwargs) -> None:
         super().__init__(scope, id, **kwargs)

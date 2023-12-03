@@ -4,8 +4,8 @@ import aws_cdk as cdk
 
 
 # Data pipeline constructs
-from projects.data_pipeline.lambdaA.lambdaA_stack import lambdaA
-from projects.data_pipeline.lambdaB.lambdaB_stack import lambdaB
+
+from projects.data_pipeline.cdk_stack.data_pipeline_stack import dataPipeline
 
 # API constructs
 from projects.api.lambdaPost.lambdaPost_stack import lambdaPost
@@ -15,8 +15,8 @@ from projects.api.lambdaPost.lambdaPost_stack import lambdaPost
 app = cdk.App()
 
 
-lambdaA(app, "lambdaA")
-lambdaB(app, "lambdaB")
+
 lambdaPost(app, "lambdaPost")
+dataPipeline(app, "dataPipeline")
 
 app.synth()
