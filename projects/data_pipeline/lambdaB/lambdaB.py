@@ -3,7 +3,7 @@ import boto3
 import json
 from typing import Any
 import datetime as dt
-
+import logging
 
 logger = logging.getLogger()
 
@@ -47,7 +47,7 @@ def handler(event, context):
         for order in response["orders"]:
             if order["status"] == "rejected":
                 # Generate alert on Slack
-                generate_alert()
+                generate_alert("sample message")
             else:
                 logger.info("Storing data in s3")
                 save_to_s3(data=event, filename=f"orders/order_{dt.datetime.now(dt.timezone.utc).isoformat()}")
