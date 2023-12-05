@@ -3,7 +3,7 @@ from constructs import Construct
 from aws_cdk import (
     Stack,
     aws_lambda as _lambda,
-    aws_apigateway as apigw,
+    aws_apigateway as apigateway,
 )
 
 class lambdaPost(Stack):
@@ -23,7 +23,7 @@ class lambdaPost(Stack):
             timeout=cdk.Duration.minutes(5)
         )
 
-        apigw.LambdaRestApi(
+        api_gateway = apigateway.LambdaRestApi(
             self, 'Endpoint',
             handler=my_lambda,
         )

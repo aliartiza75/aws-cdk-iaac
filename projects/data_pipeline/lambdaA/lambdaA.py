@@ -8,7 +8,6 @@ def handler(event, context):
 
     """Generate event for results processing."""
     
-    print(event)
     response = {
         "results": random.choice([True, False])
     }

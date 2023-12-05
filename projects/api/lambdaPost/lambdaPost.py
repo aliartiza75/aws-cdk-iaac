@@ -42,7 +42,9 @@ def save_to_db(records: list[dict[str, Any]]):
 
 
 def handler(event, context):
-    """Process POST request to the API."""
+    """
+    Process POST request to the API
+    """
 
     logger.info(
         'Received %s request to %s endpoint',
@@ -52,6 +54,7 @@ def handler(event, context):
     if event["httpMethod"] == "POST":
     
         if (orders := event['body']) is not None:
+    
             logger.info("Orders received: %s.", orders)
             save_to_db(records=orders)
 
