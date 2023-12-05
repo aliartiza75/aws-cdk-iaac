@@ -37,12 +37,13 @@ jobs:
         sudo npm install -g aws-cdk
         sudo apt install awscli
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Lint with flake8
+    - name: Lint with pycodestyle
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        echo "AAA"
-        echo ${{ vars.TEST_VARIABLE }}
-        echo ${{ vars.TEST_SECRET }}
+        # echo ${{ vars.TEST_VARIABLE }}
+        # echo ${{ vars.TEST_SECRET }}
+        pycodestyle projects/*/*.py
+        pycodestyle projects/*/*/*.py
     - name: Test with pytest
       run: |
         pytest

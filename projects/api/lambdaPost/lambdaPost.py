@@ -17,16 +17,12 @@ def generate_response(status_code, message):
     status_code:    [int] status code
     message:        [str] response message
     """
-    
-    return {
-                "isBase64Encoded": False,
-                "statusCode": status_code,
-                "headers": {
-                    "Content-Type": "application/json"
-                },
-                "body": message
-    }
-
+    return {"isBase64Encoded": False,
+            "statusCode": status_code,
+            "headers": {"Content-Type": "application/json"
+                        },
+            "body": message
+            }
 
 
 def save_to_db(records: list[dict[str, Any]]):
@@ -52,16 +48,16 @@ def handler(event, context):
         event["path"])
 
     if event["httpMethod"] == "POST":
-    
+
         if (orders := event['body']) is not None:
-    
+
             logger.info("Orders received: %s.", orders)
             save_to_db(records=orders)
 
             return generate_response(201, json.dumps({"message": "Record has been stored in DB"}))
 
         return generate_response(400, json.dumps({"errorMessage": "Request body is empty"}))
-    
+
     else:
 
         return generate_response(400, json.dumps({"errorMessage": "Invalid HTTP Method"}))
