@@ -1,65 +1,98 @@
 
-# Welcome to your CDK Python project!
+# AWS CDK IaaC
 
-You should explore the contents of this project. It demonstrates a CDK app with an instance of a stack (`projects_stack`)
-which contains an Amazon SQS queue that is subscribed to an Amazon SNS topic.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## 
+The repository contains the manifests to create AWS resource for 
 
-This project is set up like a standard Python project.  The initialization process also creates
-a virtualenv within this project, stored under the .venv directory.  To create the virtualenv
-it assumes that there is a `python3` executable in your path with access to the `venv` package.
-If for any reason the automatic creation of the virtualenv fails, you can create the virtualenv
-manually once the init process completes.
+1. API
+2. Data Pipeline
 
-To manually create a virtualenv on MacOS and Linux:
 
-```
-$ python3 -m venv .venv
-```
 
-After the init process completes and the virtualenv is created, you can use the following
-step to activate your virtualenv.
+## Overview
 
-```
-$ source .venv/bin/activate
-```
+### Folder Structure
 
-If you are a Windows platform, you would activate the virtualenv like this:
-
-```
-% .venv\Scripts\activate.bat
-```
-
-Once the virtualenv is activated, you can install the required dependencies.
-
-```
-$ pip install -r requirements.txt
-```
-
-At this point you can now synthesize the CloudFormation template for this code.
-
-```
-$ cdk synth
-```
-
-You can now begin exploring the source code, contained in the hello directory.
-There is also a very trivial test included that can be run like this:
+```bash
+├── app.py
+├── cdk.json
+├── LICENSE
+├── projects
+│   ├── api                                                     # It contains the manifest for the Lambda API
+│   │   └── lambdaPost
+│   │       ├── lambdaPost.py                                   # It contains the code for lambda API
+│   │       └── lambdaPost_stack.py                             # It contains the constructs for the lambda API
+│   ├── data_pipeline                                           # It contains the manifest for the data pipeline
+│   │   ├── cdk_stack
+│   │   │   └── data_pipeline_stack.py                          # it contains the constructs for the Data Pipeline
+│   │   ├── lambdaA
+│   │   │   └── lambdaA.py                                      # it contains the code for LambdaA
+│   │   └── lambdaB
+│   │       └── lambdaB.py                                      # It contains the code for LambdaB
+│   └── __init__.py
+├── README.md
+├── requirements-dev.txt
+├── requirements.txt
+├── setup.cfg                                                   # It contains the configuration for the pycodestyle.
+└── tests                                                       # it contains the unit test for the api and data_pipeline stack contructs
+    ├── __init__.py
+    └── unit
+        ├── __init__.py
+        ├── test_api_stack.py
+        └── test_data_pipeline_stack.py
 
 ```
-$ pytest
+
+
+### Dependencies / Pre-requisites
+
+1. Install node.js and npm.
+
+2. Install aws-cdk cli:
+```bash
+$ sudo npm install -g aws-cdk
+```
+3. Install pip3.
+
+4. Install python packages:
+
+```
+$ sudo pip3 install -r requirements-dev.txt
 ```
 
-To add additional dependencies, for example other CDK libraries, just add to
-your requirements.txt file and rerun the `pip install -r requirements.txt`
-command.
+5. Confiure AWS Credentials
 
-## Useful commands
+**NOTE** For github actions configure action secret for AWS ACCESS_KEY, ACCESS_SECRET and REGION.
 
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
+### Code Logic
 
-Enjoy!
+#### API
+
+It is a simple lambda exposed via API Gateway.
+
+#### Data Pipeline
+
+In data pipeline, lambdaA is triggerd by an event after 1 minute. If lambda is able to process the event it will forward the event to an SQS queue. lambdaB will receive the event, if the result is true, the event will be processed an stored in a S3 bucket. If the result is false, it will re invoke the lambdaA.
+
+
+### Details
+
+1. To deploy the resources
+
+```bash
+cdk bootstrap
+cdk deploy --all
+```
+
+2. To run tests
+
+```
+pytest
+```
+
+3. To destroy resource
+```bash
+cdk destroy --all
+```
+
