@@ -41,4 +41,4 @@ jobs:
         AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
       run: |
         cdk bootstrap
-        cdk deploy --all
+        cdk deploy --all --require-approval never
