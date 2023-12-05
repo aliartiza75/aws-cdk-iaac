@@ -41,7 +41,7 @@ class dataPipeline(Stack):
                            )
         rule.add_target(targets.LambdaFunction(lambdaA))
 
-        # Codedeploy
+        # ###Codedeploy
         # application = codedeploy.LambdaApplication(self, "CodeDeployApplication", application_name=lambdaA.function_name)
 
         # version1_alias = _lambda.Alias(self, "alias",
