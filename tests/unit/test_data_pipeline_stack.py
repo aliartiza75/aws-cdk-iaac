@@ -39,4 +39,4 @@ def test_iam_created():
     stack = dataPipeline(app, "dataPipeline")
     template = assertions.Template.from_stack(stack)
 
-    template.resource_count_is("AWS::IAM::Role", 3)
+    template.resource_count_is("AWS::IAM::Role", 2)
