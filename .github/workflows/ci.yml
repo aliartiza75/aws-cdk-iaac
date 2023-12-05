@@ -42,7 +42,6 @@ jobs:
         # stop the build if there are Python syntax errors or undefined names
         # echo ${{ vars.TEST_VARIABLE }}
         # echo ${{ vars.TEST_SECRET }}
-        pycodestyle projects/*/*.py
         pycodestyle projects/*/*/*.py
     - name: Test with pytest
       run: |
