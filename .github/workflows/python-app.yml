@@ -38,6 +38,8 @@ jobs:
       run: |
         # stop the build if there are Python syntax errors or undefined names
         echo "AAA"
+        echo ${{ vars.TEST_VARIABLE }}
+        echo ${{ vars.TEST_SECRET }}
     - name: Test with pytest
       run: |
         pytest
