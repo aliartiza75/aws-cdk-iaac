@@ -5,9 +5,9 @@ name: Python application
 
 on:
   push:
-    branches: [ "main", "add-manifests" ]
+    branches: [ "add-manifests" ]
   pull_request:
-    branches: [ "main", "add-manifests" ]
+    branches: [ "add-manifests" ]
 
 permissions:
   contents: read
