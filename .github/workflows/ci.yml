@@ -36,7 +36,7 @@ jobs:
         # python -m pip3 install --upgrade pip
         sudo npm install -g aws-cdk
         sudo apt install awscli
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
     - name: Lint with pycodestyle
       run: |
         # stop the build if there are Python syntax errors or undefined names
